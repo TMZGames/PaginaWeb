@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShadowDevX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            background-color: #f4f4f4;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-left: 20px;
+        }
+
+        nav {
+            margin-right: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            padding: 5px 10px;
+            transition: background 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background: #0779e4;
+            border-radius: 5px;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: url('Imágenes/hero-image.jpg') no-repeat center center/cover;
+            background-color: rgba(0, 0, 0, 0.4); /* Un tono oscuro sutil para mejorar el contraste */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* Overlay con un tono oscuro */
+            z-index: 1;
+        }
+
+        .hero div {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: #ddd;
+        }
+
+        .hero a {
+            text-decoration: none;
+            background: #0779e4;
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .hero a:hover {
+            background: #055fb2;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 60px 20px;
+        }
+
+        section h2 {
+            font-size: 2em;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        /* About Section */
+        #about {
+            background: #ffffff; /* Fondo blanco para contraste suave */
+        }
+
+        #about .content {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        #about img {
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        #about .text {
+            max-width: 600px;
+            text-align: center;
+        }
+
+        /* Skills Section */
+        #skills {
+            background: #f9f9f9; /* Fondo gris muy claro */
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .skill {
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .skill:hover {
+            transform: translateY(-10px);
+        }
+
+        .skill h3 {
+            margin-bottom: 10px;
+            font-size: 1.5em;
+            color: #0779e4;
+        }
+
+        .skill p {
+            font-size: 1em;
+            color: #666;
+        }
+
+        /* Projects Section */
+        #projects {
+            background: #f4f4f4; /* Fondo gris claro */
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .project {
+            background: #333; /* Fondo oscuro para las tarjetas de proyecto */
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .project:hover {
+            transform: translateY(-10px);
+        }
+
+        .project img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .project h3 {
+            margin: 20px 0 10px;
+            font-size: 1.5em;
+            color: #fff;
+        }
+
+        .project p {
+            font-size: 1em;
+            color: #ccc;
+            margin-bottom: 20px; /* Espacio para separar el texto del enlace */
+        }
+
+        .project a {
+            text-decoration: none;
+            color: #0779e4;
+            font-weight: 600;
+            background: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .project a:hover {
+            background: #0779e4;
+            color: #fff;
+        }
+
+        /* Testimonials Section */
+        #testimonials {
+            background: #ffffff; /* Fondo blanco */
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .testimonial {
+            background: #f9f9f9; /* Fondo gris muy claro */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .testimonial blockquote {
+            margin: 0;
+            font-style: italic;
+        }
+
+        .testimonial footer {
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: #f9f9f9; /* Fondo gris muy claro */
+            text-align: center;
+        }
+
+        #contact form {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        #contact form input, #contact form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        #contact form button {
+            padding: 15px 30px;
+            background: #0779e4;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        #contact form button:hover {
+            background: #055fb2;
+        }
+
+        /* Gallery Section */
+        #gallery {
+            background: #ffffff; /* Fondo blanco */
+            padding: 60px 20px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            background: #f9f9f9; /* Fondo gris muy claro */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .gallery-item p {
+            margin-top: 10px;
+            color: #666;
+            font-size: 1em;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1em;
+        }
+
+        footer a {
+            color: #0779e4;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .logo {
+                font-size: 1.2em;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .menu-toggle.active + nav {
+                display: block;
+            }
+
+            nav ul {
+                flex-direction: column;
+                background: #333;
+                padding: 10px;
+                position: absolute;
+                top: 60px;
+                right: 20px;
+                width: 200px;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Portfolio de ShadowDevX</div>
+        <span class="menu-toggle">&#9776;</span>
+        <nav>
+            <ul>
+                <li><a href="#about">Sobre Mí</a></li>
+                <li><a href="#skills">Habilidades</a></li>
+                <li><a href="#projects">Proyectos</a></li>
+                <li><a href="#gallery">Galería</a></li>
+                <li><a href="#testimonials">Testimonios</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div>
+            <h1>Hola, soy ShadowDevX</h1>
+            <p>Desarrollador Web | Diseñador Gráfico | Configurador de Minecraft</p>
+            <a href="#about">Conóceme más</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container content">
+            <img src="Imágenes/Logo.png" alt="Foto de perfil">
+            <div class="text">
+                <h2>Sobre Mí</h2>
+                <p>Soy un desarrollador web con experiencia en HTML, CSS, y JavaScript. Me apasiona crear soluciones innovadoras y eficaces para problemas complejos. Me encanta colaborar en proyectos desafiantes y aprender nuevas tecnologías.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2>Habilidades</h2>
+            <div class="skills-grid">
+                <div class="skill">
+                    <h3>HTML</h3>
+                    <p>Experto en la estructuración y semántica de contenido.</p>
+                </div>
+                <div class="skill">
+                    <h3>CSS</h3>
+                    <p>Proficiente en diseño responsivo, animaciones y preprocesadores.</p>
+                </div>
+                <div class="skill">
+                    <h3>JavaScript</h3>
+                    <p>Dominio en interactividad, manipulación del DOM y frameworks.</p>
+                </div>
+                <div class="skill">
+                    <h3>React</h3>
+                    <p>Creación de interfaces dinámicas con componentes reutilizables.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2>Proyectos</h2>
+            <div class="projects-grid">
+                <div class="project">
+                    <img src="Imágenes/project1.jpg" alt="Proyecto 1">
+                    <h3>BadBox</h3>
+                    <p>Un servidor donde soy manager y ayudo a los owners en la configuración.</p>
+                    <a href="https://discord.gg/gWxwXfJ54V">Discord</a>
+                </div>
+                <div class="project">
+                    <img src="Imágenes/project2.jpg" alt="Proyecto 2">
+                    <h3>VexelCraft</h3>
+                    <p>Mi propio servidor desarrollado por mí y otros dos owners.</p>
+                    <a href="https://discord.gg/qVJ8V6Q3rJ">Discord</a>
+                </div>
+                <!-- Añadir más proyectos según sea necesario -->
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <div class="container">
+            <h2>Galería</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="Imágenes/galeria1.png" alt="Imagen 1">
+                    <p>Una piedra de protección creada desde cero.</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="Imágenes/galeria2.png" alt="Imagen 2">
+                    <p>Un sistema de tops interactuable y modificable.</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="Imágenes/galeria3.png" alt="Imagen 3">
+                    <p>NPC interactuable con tienda y dialogos.</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="Imágenes/galeria4.png" alt="Imagen 4">
+                    <p>Mob custom con vida ampliada y daño ampliado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials">
+        <div class="container">
+            <h2>Testimonios</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial">
+                    <blockquote>
+                        <p>"Trabajar con ShadowDevX ha sido una experiencia increíble. Su habilidad para comprender nuestras necesidades y crear soluciones efectivas es impresionante."</p>
+                        <footer>Cliente 1</footer>
+                    </blockquote>
+                </div>
+                <div class="testimonial">
+                    <blockquote>
+                        <p>"El trabajo de ShadowDevX ha superado nuestras expectativas. Su atención al detalle y creatividad realmente marcan la diferencia."</p>
+                        <footer>Cliente 2</footer>
+                    </blockquote>
+                </div>
+                <!-- Añadir más testimonios según sea necesario -->
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contacto</h2>
+            <form action="#">
+                <input type="text" placeholder="Tu Nombre" required>
+                <input type="email" placeholder="Tu Email" required>
+                <textarea placeholder="Tu Mensaje" rows="5" required></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 ShadowDevX. Todos los derechos reservados. | <a href="#">Privacidad</a> | <a href="#">Términos</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Menu toggle for mobile
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            this.classList.toggle('active');
+            const nav = document.querySelector('nav');
+            nav.style.display = nav.style.display === 'block' ? 'none' : 'block';
+        });
+    </script>
+</body>
+</html>
